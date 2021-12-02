@@ -1,6 +1,6 @@
 (ns adventoc-2021.day02-test
   (:require [clojure.test :refer [deftest is]]
-            [adventoc-2021.day02 :refer [navigate initial_location determine_location location_multiplied]]
+            [adventoc-2021.day02 :refer [navigate initial_location determine_location determine_location_aim]]
             [clojure.java.io :as io]))
 
 (deftest navigate_test1
@@ -45,5 +45,9 @@
     (is (= (expected :horizonal) (location :horizontal)))
     (is (= (expected :depth) (location :depth)))))
 
-(deftest multiply_location_test
-  (is (= 1,714,680 (location_multiplied (determine_location (slurp (io/resource "day02.txt")))))))
+(deftest determine_location_test_aim_main
+  (let [expected {:horizonal 1980 :depth 991459 :aim 866}
+        location (determine_location_aim (slurp (io/resource "day02.txt")))]
+    (is (= (expected :horizonal) (location :horizontal)))
+    (is (= (expected :aim) (location :aim)))
+    (is (= (expected :depth) (location :depth)))))
